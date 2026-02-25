@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent { 
+        label 'AGENT-1' 
+    }
 
     stages {
         stage('Build') { 
@@ -19,5 +21,16 @@ pipeline {
         }
     }
 
-    
+    post {
+        always {
+            echo 'I will Always say Hello Again'
+            cleanWs()
+        }
+        success {
+            echo 'I will Run if Success'
+        }
+        failure {
+            echo 'I will Run if Failure'
+        }
+    }
 }
