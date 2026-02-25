@@ -19,16 +19,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            echo 'I will Always say Hello Again'
-            cleanWs()
-        }
-        success {
-            echo 'I will Run if Success'
-        }
-        failure {
-            echo 'I will Run if Failure'
-        }
-    }
+    
 }
