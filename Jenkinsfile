@@ -9,7 +9,8 @@ pipeline {
 
     options {
         // Timeout counter starts AFTER agent is allocated
-        timeout(time: 10, unit: 'SECONDS')
+        timeout(time: 10, unit: 'MINUTES')
+        disableConcurrentBuilds() // Ensures only one build of the pipeline runs at a time
     }
 
     stages {
@@ -19,7 +20,7 @@ pipeline {
                     sh """
                     echo "Building"
                     echo  $COURSE
-                    sleep 10
+                   #sleep 10
                     env
                     
                     """
