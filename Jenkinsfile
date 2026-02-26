@@ -12,7 +12,6 @@ pipeline {
             steps {
                 echo "Building"
                 echo "Jenkins environment variable COURSE: ${env.COURSE}"
-                sh 'echo Shell sees COURSE: $COURSE'
             }
         }
 
