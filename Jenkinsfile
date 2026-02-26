@@ -1,5 +1,6 @@
 pipeline {
-//  This is pre-build section
+
+    //  This is pre-build section
     agent {
         label 'AGENT-1'
     }
@@ -9,9 +10,8 @@ pipeline {
     }
 
     options {
-        // Timeout counter starts AFTER agent is allocated
         timeout(time: 10, unit: 'MINUTES')
-        disableConcurrentBuilds() // Ensures only one build of the pipeline runs at a time
+        disableConcurrentBuilds()
     }
 
     parameters {
@@ -21,67 +21,48 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-// This is build section
+
+    // This is build section
     stages {
+
         stage('Build') {
             steps {
-                script {
-                    sh """
+                sh """
                     echo "Building"
-                    echo  $COURSE
-                   #sleep 10
+                    echo $COURSE
                     env
-                echo "Hello ${params.PERSON}"
-                echo "Biography: ${params.BIOGRAPHY}"
-                echo "Toggle: ${params.DEPLOY}"
-                echo "Choice: ${params.CHOICE}"
-                echo "Password: ${params.PASSWORD}"                    
-                  """
-                }  
-                
+                    echo "Hello ${params.PERSON}"
+                    echo "Biography: ${params.BIOGRAPHY}"
+                    echo "Toggle: ${params.DEPLOY}"
+                    echo "Choice: ${params.CHOICE}"
+                    echo "Password: ${params.PASSWORD}"
+                """
             }
         }
 
-        stage('Test') { 
+        stage('Test') {
             steps {
-                 script {
-                    sh """
-                    echo "Building"
-                    echo  $COURSE
-                    
-                    """
-                    
-                   
-                }
+                sh """
+                    echo "Testing"
+                    echo $COURSE
+                """
             }
         }
 
-        stage('Deploy') { 
-            //  input {
-            //     message "Should we continue?"
-            //     ok "Yes, we should."
-            //     submitter "alice,bob"
-            //     parameters {
-            //         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-       // }
-    //}            
-        
-                when {
-                expression { "$params. DEPLOY" }
-      }
+        stage('Deploy') {
+
+            when {
+                expression { params.DEPLOY }
             }
+
             steps {
-                 script {
-                    sh """
-                    echo "Building"
-                    echo  $COURSE
-                    
-                    """
-                    
-                }
+                sh """
+                    echo "Deploying"
+                    echo $COURSE
+                """
             }
         }
-    
+    }
 
     post {
         always {
