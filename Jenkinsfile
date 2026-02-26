@@ -11,9 +11,12 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh """
                     echo "Building"
-                echo "Jenkins environment variable COURSE: ${env.COURSE}"
-                }
+                    echo  $COURSE
+                    
+                    """
+                }  
                 
             }
         }
@@ -21,8 +24,13 @@ pipeline {
         stage('Test') { 
             steps {
                  script {
-                    echo "Testing"
-                echo "Jenkins environment variable COURSE: ${env.COURSE}"
+                    sh """
+                    echo "Building"
+                    echo  $COURSE
+                    
+                    """
+                    
+                   
                 }
             }
         }
@@ -30,8 +38,12 @@ pipeline {
         stage('Deploy') { 
             steps {
                  script {
-                    echo "Deploying"
-                echo "Jenkins environment variable COURSE: ${env.COURSE}"
+                    sh """
+                    echo "Building"
+                    echo  $COURSE
+                    
+                    """
+                    
                 }
             }
         }
