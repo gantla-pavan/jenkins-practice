@@ -10,20 +10,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building"
+                script {
+                    echo "Building"
                 echo "Jenkins environment variable COURSE: ${env.COURSE}"
+                }
+                
             }
         }
 
         stage('Test') { 
             steps {
-                sh 'echo Testing'
+                 script {
+                    echo "Testing"
+                echo "Jenkins environment variable COURSE: ${env.COURSE}"
+                }
             }
         }
 
         stage('Deploy') { 
             steps {
-                sh 'echo Deploying'
+                 script {
+                    echo "Deploying"
+                echo "Jenkins environment variable COURSE: ${env.COURSE}"
+                }
             }
         }
     }
