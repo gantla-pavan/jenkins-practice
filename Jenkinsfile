@@ -10,6 +10,7 @@ pipeline {
     environment {
         COURSE = "jenkins"
     }
+    stages {
     stage('Build') {
     steps {
         echo "Building"
@@ -46,3 +47,4 @@ pipeline {
             echo 'I will Run if Failure'
         }
     }
+}
