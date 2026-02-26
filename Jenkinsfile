@@ -1,46 +1,33 @@
 pipeline {
     agent {
-        node {
-            label 'AGENT-1'
-        }
-         
-          
+        label 'AGENT-1'
     }
 
     environment {
         COURSE = "jenkins"
     }
+
     stages {
-    stage('Build') {
-    steps {
-        echo "Building"
-        echo "${env.COURSE}"
-    }
-           }
+        stage('Build') {
+            steps {
+                echo "Building"
+                echo "Jenkins environment variable COURSE: ${env.COURSE}"
+                sh 'echo Shell sees COURSE: $COURSE'
+            }
         }
+
         stage('Test') { 
             steps {
-                script {
-                    sh """
-                 echo "Testing"
-                    """
-
-                }
-                
-                 
+                sh 'echo Testing'
             }
         }
+
         stage('Deploy') { 
             steps {
-                script {
-                     sh """
-                    echo "Deploying"
-                        """
-                }
-               
+                sh 'echo Deploying'
             }
         }
-    
+    }
 
     post {
         always {
