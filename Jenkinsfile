@@ -20,17 +20,24 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                sh """
+                script {
+                    sh """
                  echo "Testing"
                     """
+
+                }
+                
                  
             }
         }
         stage('Deploy') { 
             steps {
-                sh """
-                echo "Deploying"
-                """
+                script {
+                     sh """
+                    echo "Deploying"
+                        """
+                }
+               
             }
         }
     
