@@ -1,25 +1,38 @@
 pipeline {
-    agent { 
-        label 'AGENT-1' 
+    agent {
+        node {
+            label 'AGENT-1'
+        }
+         
+          
     }
 
-    stages {
-        stage('Build') { 
-            steps {
-                echo "Building" 
-            }
+    environment {
+        COURSE = "jenkins"
+    }
+    stage('Build') {
+    steps {
+        echo "Building"
+        echo "${env.COURSE}"
+    }
+           }
         }
         stage('Test') { 
             steps {
-                echo "Testing" 
+                sh """
+                 echo "Testing"
+                    """
+                 
             }
         }
         stage('Deploy') { 
             steps {
+                sh """
                 echo "Deploying"
+                """
             }
         }
-    }
+    
 
     post {
         always {
@@ -33,4 +46,3 @@ pipeline {
             echo 'I will Run if Failure'
         }
     }
-}
