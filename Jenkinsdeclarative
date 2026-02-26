@@ -1,8 +1,10 @@
 pipeline {
     agent {
         node {
-        } 
-         label 'AGENT-1' 
+            label 'AGENT-1'
+        }
+         
+          
     }
 
     environment {
@@ -13,8 +15,8 @@ pipeline {
             steps {
                 script {
                     sh """
-                        echo "building"
-                        echo $COURSE
+                         echo "building"
+                         echo $COURSE
                     """
                 }
                 
