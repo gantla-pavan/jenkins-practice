@@ -10,17 +10,12 @@ pipeline {
     environment {
         COURSE = "jenkins"
     }
-    stages {
-        stage('Build') { 
-            steps {
-                script {
-                    sh """
-                         echo "building"
-                       sh  echo $COURSE
-                    """
-                }
-                
-            }
+    stage('Build') {
+    steps {
+        echo "Building"
+        echo "${env.COURSE}"
+    }
+           }
         }
         stage('Test') { 
             steps {
